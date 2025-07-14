@@ -1,30 +1,53 @@
 ---
+import "alpinejs";            // hydrate on the client
 import "../styles/global.css";
+
+const t = {
+  en: {
+    title: "Live-streamed boarding for cats & dogs",
+    bullet1: "24/7 HD camera access",
+    bullet2: "On-call veterinarian",
+    bullet3: "Flat ₫250 000 per night",
+    cta:     "Join wait-list",
+    lang:    "English",
+    langAlt: "Tiếng Việt"
+  },
+  vi: {
+    title: "Dịch vụ khách sạn thú cưng có camera 24/7",
+    bullet1: "Truy cập camera HD 24/7",
+    bullet2: "Bác sĩ thú y túc trực",
+    bullet3: "₫250 000/đêm trọn gói",
+    cta:     "Tham gia danh sách chờ",
+    lang:    "Tiếng Việt",
+    langAlt: "English"
+  }
+};
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <title>Trusted Pet Hotel – Wait-list</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-  </head>
-  <body class="min-h-screen flex items-center justify-center bg-slate-50">
-    <section class="max-w-xl space-y-6 p-8 bg-white rounded-3xl shadow-xl text-center">
-      <h1 class="text-3xl font-bold">Live-streamed boarding for cats & dogs</h1>
-      <ul class="list-disc pl-5 text-left space-y-1">
-        <li>24/7 HD camera access</li>
-        <li>On-call veterinarian</li>
-        <li>Flat ₫250 000 per night</li>
-      </ul>
+<html lang="en" x-data="{lang:'en'}" x-bind:lang="lang">
+<head>…</head>
+<body class="…">
+  <section class="…">
 
-      <form action="https://formspree.io/f/xgvzwpeb" method="POST" class="space-y-4">
-        <input type="email" name="email" placeholder="you@example.com"
-               class="w-full p-3 border rounded-lg" required />
-        <button type="submit"
-                class="w-full py-3 font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700">
-          Join wait-list
-        </button>
-      </form>
-    </section>
-  </body>
+    <h1 class="text-3xl font-bold" x-text="t[lang].title"></h1>
+
+    <ul class="list-disc pl-5 space-y-1">
+      <li x-text="t[lang].bullet1"></li>
+      <li x-text="t[lang].bullet2"></li>
+      <li x-text="t[lang].bullet3"></li>
+    </ul>
+
+    <form action="https://formspree.io/f/abcd1234" method="POST" class="space-y-4">
+      <input … placeholder="you@example.com" required />
+      <button … x-text="t[lang].cta"></button>
+    </form>
+
+    <!-- Toggle -->
+    <p class="text-sm mt-6">
+      <button class="underline" x-bind:class="{'font-bold':lang==='en'}" @click="lang='en'">English</button>
+      |
+      <button class="underline" x-bind:class="{'font-bold':lang==='vi'}" @click="lang='vi'">Tiếng Việt</button>
+    </p>
+  </section>
+</body>
 </html>
