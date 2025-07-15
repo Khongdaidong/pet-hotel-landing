@@ -1,80 +1,77 @@
 ---
 import "../styles/global.css";
-
-const translations = {
-  en: {
-    title:  "Live-streamed boarding for cats & dogs",
-    bullet1:"24/7 HD camera access",
-    bullet2:"On-call veterinarian",
-    bullet3:"Flat ₫250 000 per night",
-    placeholder:"you@example.com",
-    cta:    "Join wait-list",
-    lang:   "English",
-    langAlt:"Tiếng Việt"
-  },
-  vi: {
-    title:  "Dịch vụ khách sạn thú cưng có camera 24/7",
-    bullet1:"Truy cập camera HD 24/7",
-    bullet2:"Bác sĩ thú y túc trực",
-    bullet3:"₫250 000/đêm trọn gói",
-    placeholder:"ban@example.com",
-    cta:    "Tham gia danh sách chờ",
-    lang:   "Tiếng Việt",
-    langAlt:"English"
-  }
-};
 ---
 
-<html lang="en"
-      x-data='{"lang":"en","t":JSON.parse(String.raw`{${JSON.stringify(translations).slice(1,-1)}}`)}'
-      x-bind:lang="lang">
 
-<head>
-  <meta charset="utf-8" />
-  <title>Trusted Pet Hotel – Wait-list</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<html
+  lang="en"
+  x-data='{
+    lang: "en",
+    t: {
+      "en": {
+        "title":  "Live-streamed boarding for cats & dogs",
+        "bullet1":"24/7 HD camera access",
+        "bullet2":"On-call veterinarian",
+        "bullet3":"Flat ₫250 000 per night",
+        "placeholder":"you@example.com",
+        "cta":"Join wait-list"
+      },
+      "vi": {
+        "title":  "Dịch vụ khách sạn thú cưng có camera 24/7",
+        "bullet1":"Truy cập camera HD 24/7",
+        "bullet2":"Bác sĩ thú y túc trực",
+        "bullet3":"₫250 000/đêm trọn gói",
+        "placeholder":"ban@example.com",
+        "cta":"Tham gia danh sách chờ"
+      }
+    }
+  }'
+  x-bind:lang="lang"
+>
+  <head>
+    <meta charset="utf-8" />
+    <title>Trusted Pet Hotel – Wait-list</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
 
-  <!-- Alpine JS (browser-only) -->
-  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-</head>
+  <body class="min-h-screen flex items-center justify-center bg-slate-50">
+    <section class="max-w-xl space-y-6 p-8 bg-white rounded-3xl shadow-xl text-center">
 
-<body class="min-h-screen flex items-center justify-center bg-slate-50">
-  <section class="max-w-xl space-y-6 p-8 bg-white rounded-3xl shadow-xl text-center">
+      <!-- Headline -->
+      <h1 class="text-3xl font-bold" x-text="t[lang].title">
+        Live-streamed boarding for cats & dogs
+      </h1>
 
-    <!-- Headline -->
-    <h1 class="text-3xl font-bold"
-        x-text="t[lang].title">Live-streamed boarding for cats & dogs</h1>
+      <!-- Benefits -->
+      <ul class="list-disc pl-5 space-y-1 text-left">
+        <li x-text="t[lang].bullet1">24/7 HD camera access</li>
+        <li x-text="t[lang].bullet2">On-call veterinarian</li>
+        <li x-text="t[lang].bullet3">Flat ₫250 000 per night</li>
+      </ul>
 
-    <!-- Benefits -->
-    <ul class="list-disc pl-5 space-y-1 text-left">
-      <li x-text="t[lang].bullet1">24/7 HD camera access</li>
-      <li x-text="t[lang].bullet2">On-call veterinarian</li>
-      <li x-text="t[lang].bullet3">Flat ₫250 000 per night</li>
-    </ul>
+      <!-- Wait-list form -->
+      <form action="https://formspree.io/f/xgvzwpeb" method="POST" class="space-y-4">
+        <input type="email"
+               name="email"
+               class="w-full p-3 border rounded-lg"
+               x-bind:placeholder="t[lang].placeholder"
+               placeholder="you@example.com"
+               required />
+        <button type="submit"
+                class="w-full py-3 font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700"
+                x-text="t[lang].cta">
+          Join wait-list
+        </button>
+      </form>
 
-    <!-- Wait-list form -->
-    <form action="https://formspree.io/f/xgvzwpeb" method="POST" class="space-y-4">
-      <input type="email"
-             name="email"
-             class="w-full p-3 border rounded-lg"
-             x-bind:placeholder="t[lang].placeholder"
-             placeholder="you@example.com"
-             required />
-      <button type="submit"
-              class="w-full py-3 font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700"
-              x-text="t[lang].cta">Join wait-list</button>
-    </form>
+      <!-- Language toggle -->
+      <p class="text-sm mt-6">
+        <button @click="lang='en'"  :class="lang==='en' ? 'font-bold' : 'underline'">English</button>
+        |
+        <button @click="lang='vi'" :class="lang==='vi' ? 'font-bold' : 'underline'">Tiếng Việt</button>
+      </p>
 
-    <!-- Language toggle -->
-    <p class="text-sm mt-6">
-      <button @click="lang='en'"
-              :class="lang==='en' ? 'font-bold' : 'underline'">English</button>
-      |
-      <button @click="lang='vi'"
-              :class="lang==='vi' ? 'font-bold' : 'underline'">Tiếng Việt</button>
-    </p>
-
-  </section>
-</body>
+    </section>
+  </body>
 </html>
-
