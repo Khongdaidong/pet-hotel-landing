@@ -1,11 +1,11 @@
 import { defineConfig } from 'astro/config';
-import tailwindcss from 'tailwindcss';
+import tailwindcss from '@tailwindcss/vite';
 
 export default defineConfig({
-  integrations: [],
-
   vite: {
-    plugins: [tailwindcss()],               // <-- COMMA here
-    optimizeDeps: { include: ['alpinejs'] } // <-- closing brace OK
-  }
+    plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: ['alpinejs'],
+    },
+  },
 });
