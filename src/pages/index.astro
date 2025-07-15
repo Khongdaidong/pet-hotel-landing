@@ -1,5 +1,4 @@
 ---
-import "alpinejs";            // hydrate on the client
 import "../styles/global.css";
 
 const t = {
@@ -25,7 +24,15 @@ const t = {
 ---
 
 <html lang="en" x-data="{lang:'en'}" x-bind:lang="lang">
-<head>…</head>
+  <head>
+    <meta charset="utf-8" />
+    <title>Trusted Pet Hotel – Wait-list</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- AlpineJS – runs only in the browser -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  </head>
+
 <body class="…">
   <section class="…">
 
