@@ -2,7 +2,8 @@
 // Simple HMAC-SHA256 JWT util for Cloudflare Workers
 
 const ENC = new TextEncoder();
-export const SECRET = "CHANGEME-super-secret-key"; // later move to wrangler secret
++ // Cloudflare injects secrets via env. We'll read from globalThis if present.
++ const SECRET = globalThis.JWT_SECRET || "dev-secret";
 
 async function hmac(data) {
   const key = await crypto.subtle.importKey(
